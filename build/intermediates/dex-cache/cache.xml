@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/22.2.0/support-annotations-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="66b42a1f3eb7676070b7ef7f14b603483aecbee1">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/support-annotations-22.2.0_363a7a68960bd5d9e5b65ee89ff4432ab55302e8/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/Desktop/demo/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/22.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="73753982da6bde518f3a4c6b372749981d14d1a0">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-appcompat-v7-22.2.0_6c247aa6f9cdf10229c5bd8ba5416a7886102c9a/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/.gradle/caches/modules-2/files-2.1/com.loopj.android/android-async-http/1.4.6/a845a88238be0b5be9d238652c1bc0605ef91f52/android-async-http-1.4.6.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="a845a88238be0b5be9d238652c1bc0605ef91f52">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/android-async-http-1.4.6_097012fd360858b19d1f9785c1663fa43b407218/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/Desktop/demo/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/classes.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="1ee588ff2c4daf7b97c1cbf922a6c7f027285c2f">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/com.android.support-support-v4-22.2.0_5fd4293f869637ec4adcf180cedfd06546c16a83/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/Desktop/demo/app/build/intermediates/incremental-classes/debug/instant-run-bootstrap.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="bf93419dd914a251816f267716385289dae0c266">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run-bootstrap_6cd3f961d213a916026078a35b92ac9c8f94db92/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/Desktop/demo/app/build/intermediates/incremental-runtime-classes/debug/instant-run.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="5f35cf9294aba49cce90785149b12eb3e768221c">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/instant-run_9d74e1bba08e99e0e03a179e8e587154483b8c51/classes.dex" />
+    </item>
+    <item
+        is-multidex="true"
+        jar="/Users/yanhuo/Desktop/demo/app/build/intermediates/exploded-aar/com.android.support/support-v4/22.2.0/jars/libs/internal_impl-22.2.0.jar"
+        jumboMode="true"
+        optimize="true"
+        revision="22.0.1"
+        sha1="57f2ab85c164ff1676ec64dee787981c046fab79">
+        <dex dex="/Users/yanhuo/Desktop/demo/app/build/intermediates/transforms/dex/debug/folders/1000/10/internal_impl-22.2.0_ecdd71bebef2770783aa941102f0aec1efcd3686/classes.dex" />
+    </item>
+
+</items>
