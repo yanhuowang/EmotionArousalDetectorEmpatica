@@ -1,0 +1,35 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="15dp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/intructionsTitle"
+        android:text="Instructions"
+        android:textSize="36sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/instructionsBody"
+        android:text='1. Start Empatica by pressing the button for more then two seconds. The app will try to connect to Empatica automatically.\n\n 2. Press "Baseline Measurements" button to start the baseline measurement section. This section will take 2 minutes, during which time, the user will be relaxed and the maxium and minimun of EAD value will be updated.\n  The size of the circle indicates the magnitude of the EDA.\n\n  3.Press "Arousal Detection" button to start the arousal detection section. During this section, the user will watch several emotionally evocative videos.  The size of the circle indicates the magnitude of the EDA. And whenever there is an arousal, the circle will change to red.\n\n  4.You can always press the "Exit" button on the top right to go to the instruction page and start a new experiment.'
+        android:textSize="14sp"
+        android:layout_margin="15dp" />
+
+    <Button
+        android:text="Baseline Measurements"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/buttonStartBaseline"
+        android:textSize="30sp"
+        style="@android:style/Widget.Button"
+        android:layout_marginTop="30dp"
+        android:layout_marginEnd="30dp" />
+</LinearLayout>
+
