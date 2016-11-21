@@ -10,17 +10,18 @@
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_gravity="right"
+        android:textSize="24sp"
         android:id="@+id/buttonExit"
         style="@style/Widget.AppCompat.Button.Small"
         android:layout_alignParentEnd="true" />
 
     <TextView
+        android:id="@+id/title"
         android:text="Baseline Measurements"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:id="@+id/baselineTitle"
-        android:textSize="24sp"
+        android:textSize="30sp"
         android:textStyle="normal|bold"
         android:layout_margin="15dp" />
 
@@ -29,8 +30,6 @@
         android:layout_weight="1.5"
         android:layout_width="match_parent"
         android:layout_height="match_parent" >
-
-        <!-- 3 columns -->
 
         <TableRow
             android:id="@+id/dataArea"
@@ -44,6 +43,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24sp"
                 android:text="status" />
 
             <TextView
@@ -51,6 +51,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24sp"
                 android:text="device name" />
         </TableRow>
 
@@ -66,20 +67,25 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="EDA:" />
+                android:text="EDA:"
+                android:textSize="24sp"
+                android:textColor="@color/darkblue"/>
 
             <TextView
                 android:id="@+id/eda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-" />
+                android:text="-"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/timer_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textSize="24sp"
+                android:textColor="@color/darkblue"
                 android:text="Time:" />
 
             <TextView
@@ -87,7 +93,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-:-" />
+                android:text="-"
+                android:textSize="24sp" />
         </TableRow>
 
         <TableRow
@@ -102,28 +109,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="MAX:" />
+                android:text="Max:"
+                android:textSize="24sp"
+                android:textColor="@color/darkblue"/>
 
             <TextView
                 android:id="@+id/max"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-" />
+                android:text="-"
+                android:textSize="24sp" />
 
             <TextView
                 android:id="@+id/min_label"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="MAX:" />
+                android:text="Min:"
+                android:textSize="24sp"
+                android:textColor="@color/darkblue"/>
 
             <TextView
                 android:id="@+id/min"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="-" />
+                android:text="-"
+                android:textSize="24sp" />
         </TableRow>
 
     </TableLayout>
@@ -137,9 +150,11 @@
         android:id="@+id/buttonArousal"
         style="@android:style/Widget.Button"
         android:layout_alignParentEnd="true"
-        android:layout_margin="15dp" />
+        android:layout_margin="15dp"
+        android:visibility="invisible" />
 
     <RelativeLayout
+        android:id="@+id/background"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"

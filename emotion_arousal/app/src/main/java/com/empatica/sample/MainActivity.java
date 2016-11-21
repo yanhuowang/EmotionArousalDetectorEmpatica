@@ -35,8 +35,9 @@ public class MainActivity extends AppCompatActivity {
         buttonStartBaseline = (Button) findViewById(R.id.buttonStartBaseline);
         buttonStartBaseline.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, BaselineActivity.class);
+                Intent intent = new Intent(MainActivity.this, MeasurementsActivity.class);
                 MainActivity.this.startActivity(intent);
+                finish();
             }
         });
     }

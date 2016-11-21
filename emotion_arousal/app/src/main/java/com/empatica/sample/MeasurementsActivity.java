@@ -5,14 +5,15 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
-import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -24,14 +25,24 @@ import com.empatica.empalink.config.EmpaStatus;
 import com.empatica.empalink.delegate.EmpaDataDelegate;
 import com.empatica.empalink.delegate.EmpaStatusDelegate;
 
-public class BaselineActivity extends AppCompatActivity implements EmpaDataDelegate, EmpaStatusDelegate {
+
+public class MeasurementsActivity extends AppCompatActivity implements EmpaDataDelegate, EmpaStatusDelegate {
 
     private static final int REQUEST_ENABLE_BT = 1;
-    private static final long STREAMING_TIME = 50000; // Stops streaming 10 seconds after connection
+    // private static final long STREAMING_TIME = 50000;
 
     private static final String EMPATICA_API_KEY = "f1cb320f9ae94325a9651068f68b01ec"; // TODO insert your API Key here
 
     private final int EDA_CHANGED = 1;
+    private final int AROUSAL_DETECTED = 2;
+    private final int AROUSAL_FINISHED = 3;
+
+    private final int PREPARE = 0;
+    private final int BASELINE = 1;
+    private final int AROUSAL = 2;
+
+    private int mode = PREPARE;
+    private boolean arousal_detected = false;
 
     private EmpaDeviceManager deviceManager;
 
@@ -40,28 +51,46 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
 
     private TextView statusLabel;
     private TextView deviceNameLabel;
-    private TableRow dataCnt;
+    private TextView max;
+    private TextView min;
 
     private ImageView edaImage;
     private SeekBar edaSeekBar;
+    private Button exitButton;
+    private Button startArousal;
+    private TextView title;
+    private TextView timerLable;
+    private TextView timer;
+    private RelativeLayout background;
+
+
+    private float maxValue = 0;
+    private float minValue = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.measurements);
 
         // Initialize vars that reference UI components
         statusLabel = (TextView) findViewById(R.id.status);
-        dataCnt = (TableRow) findViewById(R.id.dataArea);
-
 
         edaLabel = (TextView) findViewById(R.id.eda);
 
 
         deviceNameLabel = (TextView) findViewById(R.id.deviceName);
+        max = (TextView) findViewById(R.id.max);
+        min = (TextView) findViewById(R.id.min);
 
         edaImage = (ImageView) findViewById(R.id.eda_image);
         edaSeekBar = (SeekBar) findViewById(R.id.eda_seekBar);
+
+        exitButton = (Button) findViewById(R.id.buttonExit);
+        startArousal = (Button) findViewById(R.id.buttonArousal);
+        title = (TextView) findViewById(R.id.title);
+        timer = (TextView) findViewById(R.id.timer);
+        timerLable = (TextView) findViewById(R.id.timer_label);
+        background = (RelativeLayout) findViewById(R.id.background);
 
         // Create a new EmpaDeviceManager. MainActivity is both its data and status delegate.
         deviceManager = new EmpaDeviceManager(getApplicationContext(), this, this);
@@ -87,7 +116,24 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
 
             }
         });
+
+        exitButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                deviceManager.disconnect();
+                Intent intent = new Intent(MeasurementsActivity.this, MainActivity.class);
+                MeasurementsActivity.this.startActivity(intent);
+                finish();
+            }
+        });
+
+        startArousal.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                changeToArousalMode();
+            }
+        });
     }
+
+
 
     @Override
     protected void onPause() {
@@ -117,6 +163,12 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
                     params.height = progress * 8;
                     edaImage.setLayoutParams(params);
                     break;
+                case AROUSAL_DETECTED:
+                    background.setBackgroundResource(R.mipmap.background_ar);
+                    break;
+                case AROUSAL_FINISHED:
+                    background.setBackgroundResource(R.mipmap.background);
+                    break;
             }
         };
     };
@@ -135,7 +187,7 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
                 updateLabel(deviceNameLabel, "To: " + deviceName);
             } catch (ConnectionNotAllowedException e) {
                 // This should happen only if you try to connect when allowed == false.
-                Toast.makeText(BaselineActivity.this, "Sorry, you can't connect to this device", Toast.LENGTH_SHORT).show();
+                Toast.makeText(MeasurementsActivity.this, "Sorry, you can't connect to this device", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -174,18 +226,30 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
             deviceManager.startScanning();
         // The device manager has established a connection
         } else if (status == EmpaStatus.CONNECTED) {
-            // Stop streaming after STREAMING_TIME
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    dataCnt.setVisibility(View.VISIBLE);
-                    new Handler().postDelayed(new Runnable() {
-                        @Override
-                        public void run() {
-                            // Disconnect device
-                            deviceManager.disconnect();
+                    new CountDownTimer(12000, 1000) {
+
+                        public void onTick(long millisUntilFinished) {
+                            if (millisUntilFinished > 11000) {
+                                timerLable.setText("Stabilizing...");
+                                timer.setText((millisUntilFinished - 11000)/ 1000 + "s");
+                            }
+                            else {
+                                mode = BASELINE;
+                                timerLable.setText("Measuring...");
+                                timer.setText(millisUntilFinished / 1000 + "s");
+                            }
                         }
-                    }, STREAMING_TIME);
+
+                        public void onFinish() {
+                            mode = PREPARE;
+                            timerLable.setText("Time is up!");
+                            timerLable.setTextColor(getResources().getColor(R.color.red));
+                            timer.setVisibility(View.INVISIBLE);
+                        }
+                    }.start();
                 }
             });
         // The device manager disconnected from a device
@@ -212,13 +276,41 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
     @Override
     public void didReceiveGSR(float gsr, double timestamp) {
         updateLabel(edaLabel, "" + gsr);
+        if (mode == BASELINE && gsr > maxValue) {
+            maxValue = gsr;
+            updateLabel(max, "" + gsr);
+        }
+
+        if (mode == BASELINE && gsr < minValue) {
+            minValue = gsr;
+            updateLabel(min, "" + gsr);
+        }
+
         // send message to UI thread
-        Message message = new Message();
-        Bundle bundle = new Bundle();
-        bundle.putInt("what", EDA_CHANGED);
-        bundle.putFloat("value", gsr);
-        message.setData(bundle);
-        mHandler.sendMessage(message);
+        Message message_eda = new Message();
+        Bundle bundle_eda = new Bundle();
+        bundle_eda.putInt("what", EDA_CHANGED);
+        bundle_eda.putFloat("value", gsr);
+        message_eda.setData(bundle_eda);
+        mHandler.sendMessage(message_eda);
+
+        if (mode == AROUSAL && gsr > maxValue && !arousal_detected) {
+            arousal_detected = true;
+            Message message_ad = new Message();
+            Bundle bundle_ad = new Bundle();
+            bundle_ad.putInt("what", AROUSAL_DETECTED);
+            message_ad.setData(bundle_ad);
+            mHandler.sendMessage(message_ad);
+        }
+
+        if (mode == AROUSAL && gsr < maxValue && arousal_detected) {
+            arousal_detected = false;
+            Message message_af = new Message();
+            Bundle bundle_af = new Bundle();
+            bundle_af.putInt("what", AROUSAL_FINISHED);
+            message_af.setData(bundle_af);
+            mHandler.sendMessage(message_af);
+        }
     }
 
     @Override
@@ -239,5 +331,13 @@ public class BaselineActivity extends AppCompatActivity implements EmpaDataDeleg
                 label.setText(text);
             }
         });
+    }
+
+    private void changeToArousalMode() {
+        mode = AROUSAL;
+        timer.setVisibility(View.INVISIBLE);
+        timerLable.setVisibility(View.INVISIBLE);
+        startArousal.setVisibility(View.INVISIBLE);
+        updateLabel(title, "Arousal Detection");
     }
 }
