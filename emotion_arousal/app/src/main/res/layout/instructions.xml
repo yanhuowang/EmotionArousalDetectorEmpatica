@@ -18,7 +18,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/instructionsBody"
-        android:text='1. Start Empatica by pressing the button for more then two seconds. The app will try to connect to Empatica automatically.\n\n 2. Press "Baseline Measurements" button to start the baseline measurement section. This section will take 2 minutes, during which time, the user will be relaxed and the maxium and minimun of EAD value will be updated.\n  The size of the circle indicates the magnitude of the EDA.\n\n  3.Press "Arousal Detection" button to start the arousal detection section. During this section, the user will watch several emotionally evocative videos.  The size of the circle indicates the magnitude of the EDA. And whenever there is an arousal, the circle will change to red.\n\n  4.You can always press the "Exit" button on the top right to go to the instruction page and start a new experiment.'
+        android:text='Welcome!\n\nThis application is designed to view and visualize the EDA (Electro Dermal Activity) measurments in real time using Empatica wristband. It starts by defining the EDA baseline of the user at reast condition. After that, the second part detects any emotional arousal based on the EDA value changes. For more information and instructions, please refer to the user manual.'
         android:textSize="14sp"
         android:layout_margin="15dp" />
 
