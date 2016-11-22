@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/intructionsTitle"
         android:text="Instructions"
+        android:textColor="@color/darkblue"
         android:textSize="36sp"
         android:textStyle="bold" />
 
@@ -18,12 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/instructionsBody"
-        android:text='Welcome!\n\nThis application is designed to view and visualize the EDA (Electro Dermal Activity) measurments in real time using Empatica wristband. It starts by defining the EDA baseline of the user at reast condition. After that, the second part detects any emotional arousal based on the EDA value changes. For more information and instructions, please refer to the user manual.'
-        android:textSize="14sp"
+        android:text='Welcome!\n\nThis application is designed to view and visualize the EDA (Electro Dermal Activity) measurments in real time using Empatica E4 wristband. It starts by defining the EDA baseline of the user at reast condition. After that, the second part detects any emotional arousal based on the EDA value changes. For more information and instructions, please refer to the user manual.'
+        android:textSize="18sp"
         android:layout_margin="15dp" />
 
     <Button
         android:text="Baseline Measurements"
+        android:textColor="@color/darkblue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/buttonStartBaseline"

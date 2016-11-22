@@ -229,12 +229,12 @@ public class MeasurementsActivity extends AppCompatActivity implements EmpaDataD
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    new CountDownTimer(12000, 1000) {
+                    new CountDownTimer(120000, 1000) {
 
                         public void onTick(long millisUntilFinished) {
-                            if (millisUntilFinished > 11000) {
+                            if (millisUntilFinished > 110000) {
                                 timerLable.setText("Stabilizing...");
-                                timer.setText((millisUntilFinished - 11000)/ 1000 + "s");
+                                timer.setText((millisUntilFinished - 110000)/ 1000 + "s");
                             }
                             else {
                                 mode = BASELINE;
@@ -248,6 +248,7 @@ public class MeasurementsActivity extends AppCompatActivity implements EmpaDataD
                             timerLable.setText("Time is up!");
                             timerLable.setTextColor(getResources().getColor(R.color.red));
                             timer.setVisibility(View.INVISIBLE);
+                            startArousal.setVisibility(View.VISIBLE);
                         }
                     }.start();
                 }
